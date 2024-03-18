@@ -12,6 +12,7 @@ Este repositório contém a infraestrutura como código (IaC) para provisionar u
 │ ├── services/         # Services do Kubernetes para expor a aplicação
 │ ├── ingress/          # Ingress do Kubernetes para acesso HTTP externo
 └── README.md
+
 ```
 
 ## Funcionalidades de Negócio
