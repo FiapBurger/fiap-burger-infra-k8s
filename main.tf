@@ -20,8 +20,8 @@ resource "aws_security_group" "eks_lb_sg" {
   vpc_id      = aws_eks_cluster.fiap_cluster.vpc_config[0].vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 8989
+    to_port     = 8989
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -49,7 +49,7 @@ resource "aws_lb_target_group" "eks_target_group" {
     enabled             = true
     interval            = 30
     path                = "/"
-    port                = 80
+    port                = 8989
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
