@@ -41,7 +41,7 @@ resource "aws_lb" "eks_lb" {
 
 resource "aws_lb_target_group" "eks_target_group" {
   name     = "eks-target-group"
-  port     = 80
+  port     = 8989
   protocol = "HTTP"
   vpc_id   = aws_eks_cluster.fiap_cluster.vpc_config[0].vpc_id
 
@@ -59,7 +59,7 @@ resource "aws_lb_target_group" "eks_target_group" {
 
 resource "aws_lb_listener" "eks_lb_listener" {
   load_balancer_arn = aws_lb.eks_lb.arn
-  port              = 80
+  port              = 8989
   protocol          = "HTTP"
 
   default_action {
