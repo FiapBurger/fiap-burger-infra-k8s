@@ -21,19 +21,25 @@ jobs:
 
       - name: Run Lint
         run: |
+          chmod +x ./mvnw
           ./mvnw checkstyle:check
         continue-on-error: true
 
       - name: Validate and Run Tests
         run: |
+          chmod +x ./mvnw
           ./mvnw clean validate
           ./mvnw test
         continue-on-error: true
 
+      - name: Build Project
+        run: |
+          chmod +x ./mvnw
+          ./mvnw package
+
       - name: Build Docker Image
         run: |
           docker build -t alexcesarnascimento/dh-fiap-burger:${{ github.sha }} .
-          
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -59,6 +65,16 @@ jobs:
       - name: Configure kubeconfig for EKS cluster
         run: |
           aws eks update-kubeconfig --name fiap-burger-eks-cluster --region us-east-1
+
+      - name: Delete old Kubernetes resources
+        run: |
+          kubectl delete --all deployments --namespace=default
+          kubectl delete --all pods --namespace=default
+          kubectl delete --all svc --namespace=default
+          kubectl delete --all configmap --namespace=default
+          kubectl delete --all secret --namespace=default
+          kubectl delete --all hpa --namespace=default
+        continue-on-error: true
 
       - name: Deploy resources to EKS
         run: |
