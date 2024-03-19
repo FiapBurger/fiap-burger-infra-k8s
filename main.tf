@@ -79,8 +79,7 @@ resource "aws_launch_configuration" "eks_node_lc" {
 resource "aws_autoscaling_group" "eks_node_asg" {
   launch_configuration = aws_launch_configuration.eks_node_lc.name
   min_size             = 1
-  max_size             = 5  # Ajuste de acordo com suas necessidades
-  desired_capacity     = 2  # Ajuste de acordo com suas necessidades
+  max_size             = 3
+  desired_capacity     = 2
   vpc_zone_identifier  = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
-
 }
