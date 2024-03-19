@@ -13,9 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
+      - name: Terraform Format Check
+        id: fmt-check
+        run: |
+          set -eo pipefail
+          UNFORMATTED=$(terraform fmt -check -write=false)
+          if [ ! -z "$UNFORMATTED" ]; then
+            echo "Os seguintes arquivos precisam ser formatados:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
+        shell: bash
 
       - name: Terraform Init
         id: init
