@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_eks_cluster" "fiap_cluster" {
-  name     = "fiap-burger-eks-cluster"  # Nome atualizado aqui
+  name     = "fiap-burger-eks-cluster"
   role_arn = "arn:aws:iam::730335333567:role/LabRole"
 
   vpc_config {
@@ -17,7 +17,7 @@ resource "aws_eks_cluster" "fiap_cluster" {
 resource "aws_security_group" "fiapburger_sg" {
   name        = "eks-lb-and-nodes-sg"
   description = "Security group for EKS load balancer and nodes"
-  vpc_id      = aws_eks_cluster.fiap_cluster.vpc_config[0].vpc_id
+  vpc_id      = "vpc-0c9c3eae30dce3c6e"
 
   ingress {
     from_port   = 0
@@ -39,13 +39,13 @@ resource "aws_lb_target_group" "eks_target_group" {
   name     = "eks-target-group"
   port     = 31000
   protocol = "HTTP"
-  vpc_id   = aws_eks_cluster.fiap_cluster.vpc_config[0].vpc_id
+  vpc_id   = "vpc-0c9c3eae30dce3c6e"
 
   health_check {
     enabled             = true
     interval            = 30
     path                = "/"
-    port                = 31000
+    port                = "traffic-port"
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
@@ -55,7 +55,7 @@ resource "aws_lb_target_group" "eks_target_group" {
 
 resource "aws_lb_listener" "eks_lb_listener" {
   load_balancer_arn = aws_lb.eks_lb.arn
-  port              = 31000
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -78,8 +78,5 @@ resource "aws_eks_node_group" "fiap_node_group" {
 
   ami_type       = "AL2_x86_64"
   instance_types = ["t3.medium"]
-
-  depends_on = [
-    aws_lb_listener.eks_lb_listener
-  ]
 }
+
