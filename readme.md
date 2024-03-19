@@ -32,7 +32,6 @@ A aplicação FiapBurger implementa as seguintes funcionalidades:
 - kubectl configurado para interagir com seu cluster Kubernetes.
 
 ### Configuração e Implantação
-
 1. **Provisionar o Cluster EKS**:
     - Navegue até `terraform/eks`.
     - Execute `terraform init` e `terraform apply` para criar o cluster EKS.
