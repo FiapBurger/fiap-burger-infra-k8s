@@ -44,6 +44,7 @@ As instruções a seguir detalham a ordem e os comandos para subir os componente
 ```
 kubectl apply -f constantes.configmap.yaml
 kubectl apply -f postgres-sql.configmap.yaml
+
 ```
 
 ### Secrets
