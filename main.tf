@@ -83,10 +83,10 @@ resource "aws_launch_template" "eks_node_lt" {
   }
 
   user_data = base64encode(<<EOF
-#!/bin/bash
-set -o xtrace
-/etc/eks/bootstrap.sh ${aws_eks_cluster.fiap_cluster.name}
-EOF
+  #!/bin/bash
+  set -o xtrace
+  /etc/eks/bootstrap.sh ${aws_eks_cluster.fiap_cluster.name}
+  EOF
   )
 }
 
@@ -104,10 +104,4 @@ resource "aws_autoscaling_group" "eks_nodes" {
     "subnet-081d1613d89ee8ba6",
     "subnet-0b97e6916779e8ddb"
   ]
-
-  tag {
-    key                 = "kubernetes.io/cluster/${aws_eks_cluster.fiap_cluster.name}"
-    value               = "owned"
-    propagate_at_launch = true
-  }
 }
