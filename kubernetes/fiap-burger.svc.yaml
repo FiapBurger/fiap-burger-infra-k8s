@@ -4,7 +4,7 @@ metadata:
   name: fiap-burger-api-svc
 spec:
 #  type: NodePort
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       port: 80
