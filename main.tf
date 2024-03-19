@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_eks_cluster" "fiap_cluster" {
-  name     = "eks-lb-and-nodes-sg"
+  name     = "fiap-burger-eks-cluster"  # Nome atualizado aqui
   role_arn = "arn:aws:iam::730335333567:role/LabRole"
 
   vpc_config {
