@@ -68,23 +68,19 @@ resource "aws_lb_listener" "eks_lb_listener" {
   }
 }
 
-module "eks_nodes" {
-  source          = "terraform-aws-modules/eks/aws//modules/node_group"
-  cluster_name    = aws_eks_cluster.fiap_cluster.name
-  cluster_version = "1.21"
-  node_group_name = "workers"
-  node_instance_type = "t2.medium"
-  node_desired_capacity = 2
-  node_min_capacity = 1
-  node_max_capacity = 3
+resource "aws_launch_configuration" "eks_node_lc" {
+  name          = "eks-node-lc"
+  image_id      = "ami-0440e4f6b9713faf6"
+  instance_type = "t3.small"
+  security_groups = [aws_security_group.fiapburger_sg.id]
+  key_name        = ""
+}
 
-  subnet_ids                 = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
-  additional_tags            = {}
-  key_name                   = null
-  kubelet_extra_args         = {}
-  tags                        = {}
-  node_group_tags             = {}
-  map_additional_iam_policies = []
+resource "aws_autoscaling_group" "eks_node_asg" {
+  launch_configuration = aws_launch_configuration.eks_node_lc.name
+  min_size             = 1
+  max_size             = 5  # Ajuste de acordo com suas necessidades
+  desired_capacity     = 2  # Ajuste de acordo com suas necessidades
+  vpc_zone_identifier  = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
 
-  node_security_group_ids = [aws_security_group.fiapburger_sg.id]
 }
