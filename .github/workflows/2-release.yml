@@ -36,9 +36,7 @@ jobs:
 
       - name: Terraform Destroy Existing Resources
         run: |
-          terraform state list | while read -r resource; do
-            terraform destroy -auto-approve -input=false "$resource"
-          done
+          terraform destroy -auto-approve -input=false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
