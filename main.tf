@@ -77,17 +77,6 @@ resource "aws_launch_template" "eks_node_lt" {
     security_groups = [aws_security_group.fiapburger_sg.id]
     associate_public_ip_address = true
   }
-
-  iam_instance_profile {
-    arn = "arn:aws:iam::730335333567:role/LabRole"
-  }
-
-  user_data = base64encode(<<EOF
-  #!/bin/bash
-  set -o xtrace
-  /etc/eks/bootstrap.sh ${aws_eks_cluster.fiap_cluster.name}
-  EOF
-  )
 }
 
 resource "aws_autoscaling_group" "eks_nodes" {
