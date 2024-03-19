@@ -67,19 +67,12 @@ resource "aws_lb_listener" "eks_lb_listener" {
     type             = "forward"
   }
 }
-#
-#resource "aws_launch_configuration" "eks_node_lc" {
-#  name          = "eks-node-lc"
-#  image_id      = "ami-0440e4f6b9713faf6"
-#  instance_type = "t3.small"
-#  security_groups = [aws_security_group.fiapburger_sg.id]
-#  key_name        = ""
-#}
-#
-#resource "aws_autoscaling_group" "eks_node_asg" {
-#  launch_configuration = aws_launch_configuration.eks_node_lc.name
-#  min_size             = 1
-#  max_size             = 3
-#  desired_capacity     = 2
-#  vpc_zone_identifier  = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
-#}
+
+resource "aws_launch_configuration" "eks_node_lc" {
+  name            = "eks-node-lc"
+  image_id        = "ami-0b0ea68c435eb488d"
+  instance_type   = "t2.micro"
+  security_groups = [aws_security_group.fiapburger_sg.id]
+}
+
+
