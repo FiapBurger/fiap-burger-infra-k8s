@@ -79,11 +79,6 @@ resource "aws_eks_node_group" "fiap_node_group" {
   ami_type       = "AL2_x86_64"
   instance_types = ["t3.medium"]
 
-  remote_access {
-    ec2_ssh_key               = "sua-chave-ssh"
-    source_security_group_ids = [aws_security_group.fiapburger_sg.id]
-  }
-
   depends_on = [
     aws_lb_listener.eks_lb_listener
   ]
