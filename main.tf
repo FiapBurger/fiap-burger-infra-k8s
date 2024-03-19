@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_eks_cluster" "fiap_cluster" {
-  name     = "fiap-burger-eks-cluster"
+  name     = "eks-lb-and-nodes-sg"
   role_arn = "arn:aws:iam::730335333567:role/LabRole"
 
   vpc_config {
@@ -64,30 +64,27 @@ resource "aws_lb_listener" "eks_lb_listener" {
   }
 }
 
-resource "aws_launch_template" "eks_node_lt" {
-  name                   = "worker"
-  image_id               = "ami-0f2a073e5c52340a0"
-  instance_type          = "t3.small"
+resource "aws_eks_node_group" "fiap_node_group" {
+  cluster_name    = aws_eks_cluster.fiap_cluster.name
+  node_group_name = "fiap-node-group"
+  node_role_arn   = "arn:aws:iam::730335333567:role/LabRole"
+  subnet_ids      = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
 
-  network_interfaces {
-    security_groups = [aws_security_group.fiapburger_sg.id]
-    associate_public_ip_address = true
-  }
-}
-
-resource "aws_autoscaling_group" "eks_nodes" {
-  name                = "eks-worker"
-  launch_template {
-    id      = aws_launch_template.eks_node_lt.id
-    version = "$Latest"
+  scaling_config {
+    desired_size = 2
+    max_size     = 3
+    min_size     = 1
   }
 
-  min_size         = 1
-  max_size         = 3
-  desired_capacity = 1
+  ami_type       = "AL2_x86_64"
+  instance_types = ["t3.medium"]
 
-  vpc_zone_identifier = [
-    "subnet-081d1613d89ee8ba6",
-    "subnet-0b97e6916779e8ddb"
+  remote_access {
+    ec2_ssh_key               = "sua-chave-ssh"
+    source_security_group_ids = [aws_security_group.fiapburger_sg.id]
+  }
+
+  depends_on = [
+    aws_lb_listener.eks_lb_listener
   ]
 }
