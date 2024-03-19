@@ -51,6 +51,10 @@ jobs:
         run: |
           docker push alexcesarnascimento/dh-fiap-burger:${{ github.sha }}
 
+      - name: Update Deployment with New Docker Image
+        run: |
+          sed -i 's|alexcesarnascimento/dh-fiap-burger:.*|alexcesarnascimento/dh-fiap-burger:${{ github.sha }}|' kubernetes/fiap-burger.deployment.yaml
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
