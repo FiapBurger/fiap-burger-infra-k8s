@@ -33,10 +33,6 @@ resource "aws_lb" "eks_lb" {
   load_balancer_type = "application"
   subnets            = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
   security_groups    = [aws_security_group.fiapburger_sg.id]
-
-  tags = {
-    Name = "eks-lb"
-  }
 }
 
 resource "aws_lb_target_group" "eks_target_group" {
