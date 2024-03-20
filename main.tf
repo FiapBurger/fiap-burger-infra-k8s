@@ -8,8 +8,8 @@ resource "aws_eks_cluster" "fiap_cluster" {
 
   vpc_config {
     subnet_ids = [
-      "subnet-081d1613d89ee8ba6",
-      "subnet-0b97e6916779e8ddb"
+      "subnet-07f986342f147ba3f",
+      "subnet-031faa0cc7884c140"
     ]
   }
 }
@@ -17,7 +17,7 @@ resource "aws_eks_cluster" "fiap_cluster" {
 resource "aws_security_group" "fiapburger_sg" {
   name        = "eks-lb-and-nodes-sg"
   description = "Security group for EKS load balancer and nodes"
-  vpc_id      = "vpc-0c9c3eae30dce3c6e"
+  vpc_id      = "vpc-05ddaee086b5d576d"
 
   ingress {
     from_port   = 0
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "eks_target_group" {
   name     = "eks-target-group"
   port     = 31000
   protocol = "HTTP"
-  vpc_id   = "vpc-0c9c3eae30dce3c6e"
+  vpc_id   = "vpc-05ddaee086b5d576d"
 
   health_check {
     enabled             = true
