@@ -25,7 +25,6 @@ A aplicação FiapBurger implementa as seguintes funcionalidades:
 
 ## Como Usar
 
-
 ### Pré-requisitos
 
 - Terraform instalado.
