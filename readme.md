@@ -38,6 +38,7 @@ A arquitetura utiliza diversos serviços da AWS e tecnologias Kubernetes para ge
 
 ## Como Rodar o Projeto com kubernates
 
+
 As instruções a seguir detalham a ordem e os comandos para subir os componentes do projeto no Kubernetes.
 
 ### ConfigMaps
