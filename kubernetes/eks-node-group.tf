@@ -4,7 +4,7 @@ resource "aws_eks_node_group" "node_group" {
   node_role_arn   = var.labRole
   subnet_ids      = ["${var.subnetA}", "${var.subnetB}", "${var.subnetC}"]
   instance_types  = ["t3.micro"]
-  capacity_type   = SPOT
+  capacity_type   = "SPOT"
 
   scaling_config {
     desired_size = 1
