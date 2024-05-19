@@ -6,25 +6,25 @@ variable labRole {
 
 variable subnetA {
   type        = string
-  default     = "subnet-09009ee96d82980e6"
+  default     = "subnet-09faa5335b7ba858c"
   description = "description"
 }
 
 variable subnetB {
   type        = string
-  default     = "subnet-08a498a94132c3a74"
+  default     = "subnet-0101ea48b8a39b120"
   description = "description"
 }
 
 variable subnetC {
   type        = string
-  default     = "subnet-002ba8eb135ca1fe1"
+  default     = "subnet-03ca5901ecfe029c1"
   description = "description"
 }
 
 variable sgId {
   type        = string
-  default     = "sg-0cc642ef6e48abc8a"
+  default     = "sg-0f4a1e33d981dc80c"
   description = "description"
 }
 
@@ -48,8 +48,20 @@ variable arnAdmEks {
 
 variable nodeName {
     type        = string
-    default     = "node-fiap-burguer"
+    default     = "node-ms-customer"
     description = ""
+}
+
+variable appName {
+  type        = string
+  default     = "ms-customer-deployment"
+  description = "nome da aplicacao"
+}
+
+variable uriECRImage{
+  type          = string
+  default       = "uri da imagem da aplicacao"
+  description   = "074153432331.dkr.ecr.us-east-1.amazonaws.com/ms-customer"
 }
 
 
