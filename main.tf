@@ -4,12 +4,12 @@ provider "aws" {
 
 resource "aws_eks_cluster" "fiap_cluster" {
   name     = "fiap-burger-eks-cluster"
-  role_arn = "arn:aws:iam::730335333567:role/LabRole"
+  role_arn = "arn:aws:iam::643230847802:role/LabRole"
 
   vpc_config {
     subnet_ids = [
-      "subnet-07f986342f147ba3f",
-      "subnet-031faa0cc7884c140"
+      "subnet-02332486181d5f757",
+      "subnet-065b86e8bc1297d97"
     ]
   }
 }
@@ -17,7 +17,7 @@ resource "aws_eks_cluster" "fiap_cluster" {
 resource "aws_security_group" "fiapburger_sg" {
   name        = "eks-lb-and-nodes-sg"
   description = "Security group for EKS load balancer and nodes"
-  vpc_id      = "vpc-05ddaee086b5d576d"
+  vpc_id      = "vpc-008220555f42a21df"
 
   ingress {
     from_port   = 0
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "eks_target_group" {
   name     = "eks-target-group"
   port     = 31000
   protocol = "HTTP"
-  vpc_id   = "vpc-05ddaee086b5d576d"
+  vpc_id   = "vpc-008220555f42a21df"
 
   health_check {
     enabled             = true
@@ -67,7 +67,7 @@ resource "aws_lb_listener" "eks_lb_listener" {
 resource "aws_eks_node_group" "fiap_node_group" {
   cluster_name    = aws_eks_cluster.fiap_cluster.name
   node_group_name = "fiap-node-group"
-  node_role_arn   = "arn:aws:iam::730335333567:role/LabRole"
+  node_role_arn   = "arn:aws:iam::643230847802:role/LabRole"
   subnet_ids      = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
 
   scaling_config {

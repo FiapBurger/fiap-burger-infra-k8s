@@ -1,24 +1,24 @@
 variable labRole {
   type        = string
-  default     = "arn:aws:iam::074153432331:role/LabRole"
+  default     = "arn:aws:iam::643230847802:role/LabRole"
   description = "description"
 }
 
 variable subnetA {
   type        = string
-  default     = "subnet-09faa5335b7ba858c"
+  default     = "subnet-02332486181d5f757"
   description = "description"
 }
 
 variable subnetB {
   type        = string
-  default     = "subnet-0101ea48b8a39b120"
+  default     = "subnet-065b86e8bc1297d97"
   description = "description"
 }
 
 variable subnetC {
   type        = string
-  default     = "subnet-03ca5901ecfe029c1"
+  default     = "subnet-060b3fa08edb4c3f7"
   description = "description"
 }
 
@@ -36,7 +36,7 @@ variable accessConfig {
 
 variable arnPrincipal {
     type        = string
-    default     = "arn:aws:iam::074153432331:role/voclabs"
+    default     = "arn:aws:iam::643230847802:role/voclabs"
     description = "arn principal de acesso ao cluster"
 }
 
@@ -61,7 +61,7 @@ variable appName {
 variable uriECRImage{
   type          = string
   default       = "uri da imagem da aplicacao"
-  description   = "074153432331.dkr.ecr.us-east-1.amazonaws.com/ms-customer"
+  description   = "643230847802.dkr.ecr.us-east-1.amazonaws.com/ms-customer"
 }
 
 variable uriCluster{
