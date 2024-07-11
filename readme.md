@@ -64,5 +64,3 @@ Para contribuir com o projeto:
 ## Link do Repositório
 
 [FiapBurger EKS Infrastructure](https://github.com/FiapBurger/fiap-burger-infra-eks)
-
-
