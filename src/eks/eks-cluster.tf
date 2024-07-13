@@ -3,8 +3,8 @@ resource "aws_eks_cluster" "fiap_burguer" {
     role_arn = var.labRole
 
     vpc_config {
-        subnet_ids = ["${var.subnetA}", "${var.subnetB}", "${var.subnetC}"]
-        security_group_ids = ["${var.sgId}"]
+        subnet_ids = [var.subnetA, var.subnetB, var.subnetC]
+        security_group_ids = [var.sgId]
     }
 
     access_config {

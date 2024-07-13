@@ -2,16 +2,27 @@
 
 Este repositório contém a infraestrutura como código (IaC) para provisionar um cluster Kubernetes no Amazon EKS, que suporta a aplicação FiapBurger, um sistema de gerenciamento de pedidos para uma lanchonete.
 
+## Comandos terraform
+
+terraform init && terraform plan
+
+
+
+
+
 ## Estrutura do Repositório
 
 ```
-├── .github/workflows/  # CI/CD com GitHub Actions
+src
+├── eks 
+│  ├── eks-access.tf
+│  ├── eks-node-group.tf
+│  ├── eks-security.tf
+│  ├── eks.tf
+│  └── variables.tf
 ├── main.tf
-├── kubernetes/
-│ ├── deployments/      # Deployments do Kubernetes para a aplicação
-│ ├── services/         # Services do Kubernetes para expor a aplicação
-│ ├── ingress/          # Ingress do Kubernetes para acesso HTTP externo
-└── README.md
+├── provider.tf
+└── vars.tf
 ```
 
 ## Funcionalidades de Negócio

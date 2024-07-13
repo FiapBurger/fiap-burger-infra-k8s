@@ -1,4 +1,4 @@
 provider "aws" {
     profile = "fiap-burguer"
-    region = "us-east-1"
+    region  = "us-east-1"
 }

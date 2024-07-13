@@ -1,19 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_eks_cluster" "fiap_cluster" {
-  name     = "fiap-burger-eks-cluster"
-  role_arn = "arn:aws:iam::643230847802:role/LabRole"
-
-  vpc_config {
-    subnet_ids = [
-      "subnet-02332486181d5f757",
-      "subnet-065b86e8bc1297d97"
-    ]
-  }
-}
-
 resource "aws_security_group" "fiapburger_sg" {
   name        = "eks-lb-and-nodes-sg"
   description = "Security group for EKS load balancer and nodes"
@@ -31,7 +15,7 @@ resource "aws_lb" "eks_lb" {
   name               = "eks-lb"
   internal           = false
   load_balancer_type = "application"
-  subnets            = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
+  subnets            = [var.subnetA, var.subnetB]
   security_groups    = [aws_security_group.fiapburger_sg.id]
 }
 
@@ -63,20 +47,3 @@ resource "aws_lb_listener" "eks_lb_listener" {
     type             = "forward"
   }
 }
-
-resource "aws_eks_node_group" "fiap_node_group" {
-  cluster_name    = aws_eks_cluster.fiap_cluster.name
-  node_group_name = "fiap-node-group"
-  node_role_arn   = "arn:aws:iam::643230847802:role/LabRole"
-  subnet_ids      = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
-
-  scaling_config {
-    desired_size = 2
-    max_size     = 3
-    min_size     = 1
-  }
-
-  ami_type       = "AL2_x86_64"
-  instance_types = ["t3.medium"]
-}
-

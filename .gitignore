@@ -1,3 +1,39 @@
-.terraform/*
-kubernetes/.terraform/*
-kubernetes/.terraform.lock.hcl
+# Ignore all .terraform directories and their contents
+.terraform/
+src/**/.terraform/
+
+# Ignore all .terraform.lock.hcl files
+.terraform.lock.hcl
+src/**/.terraform.lock.hcl
+
+# Ignore local Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Ignore crash log files
+crash.log
+
+# Ignore override files as they are usually local
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore any plan files
+*.tfplan
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Default ignored files in .idea directory
+.idea/shelf/
+.idea/workspace.xml
+.idea/httpRequests/
+
+# Ignore SonarLint files
+.idea/sonarlint/

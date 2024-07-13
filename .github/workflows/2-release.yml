@@ -1,4 +1,4 @@
-name: '2 - [feat] Build & Pull Request'
+name: '2 - [main] Release'
 
 on:
   push:
@@ -15,11 +15,11 @@ jobs:
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt -check ./src
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init ./src
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -27,15 +27,15 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate -no-color ./src
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -input=false
+        run: terraform plan -no-color -input=false ./src
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false ./src
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
