@@ -71,9 +71,9 @@ resource "aws_eks_node_group" "ms-customer-node" {
   subnet_ids      = [var.subnetA, var.subnetB, var.subnetC]
 
   scaling_config {
-    desired_size = 2
+    desired_size = 4
     max_size     = 7
-    min_size     = 1
+    min_size     = 2
   }
 
   instance_types  = ["t3.medium"]
@@ -83,5 +83,3 @@ resource "aws_eks_node_group" "ms-customer-node" {
     max_unavailable = 1
   }
 }
-
-
