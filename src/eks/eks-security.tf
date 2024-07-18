@@ -24,6 +24,7 @@ resource "aws_lb_target_group" "eks_target_group" {
   port     = 31000
   protocol = "HTTP"
   vpc_id   = "vpc-008220555f42a21df"
+  target_type = "ip"
 
   health_check {
     enabled             = true
@@ -36,7 +37,6 @@ resource "aws_lb_target_group" "eks_target_group" {
     unhealthy_threshold = 2
   }
 }
-
 resource "aws_lb_listener" "eks_lb_listener" {
   load_balancer_arn = aws_lb.eks_lb.arn
   port              = 80
