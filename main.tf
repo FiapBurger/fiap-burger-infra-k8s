@@ -64,11 +64,11 @@ resource "aws_lb_listener" "eks_lb_listener" {
   }
 }
 
-resource "aws_eks_node_group" "fiap_node_group" {
+resource "aws_eks_node_group" "ms-customer-node" {
   cluster_name    = aws_eks_cluster.fiap_cluster.name
-  node_group_name = "fiap-node-group"
-  node_role_arn   = "arn:aws:iam::643230847802:role/LabRole"
-  subnet_ids      = aws_eks_cluster.fiap_cluster.vpc_config[0].subnet_ids
+  node_group_name = var.nodeName
+  node_role_arn   = var.labRole
+  subnet_ids      = [var.subnetA, var.subnetB, var.subnetC]
 
   scaling_config {
     desired_size = 2
@@ -76,7 +76,12 @@ resource "aws_eks_node_group" "fiap_node_group" {
     min_size     = 1
   }
 
-  ami_type       = "AL2_x86_64"
-  instance_types = ["t3.medium"]
+  instance_types  = ["t3.medium"]
+  capacity_type   = "SPOT"
+
+  update_config {
+    max_unavailable = 1
+  }
 }
+
 
