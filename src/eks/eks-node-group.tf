@@ -5,9 +5,9 @@ resource "aws_eks_node_group" "fiap_node_group" {
   subnet_ids      = [var.subnetA, var.subnetB, var.subnetC]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 3
-    min_size     = 1
+    desired_size = 3
+    max_size     = 7
+    min_size     = 2
   }
 
   ami_type       = "AL2_x86_64"
