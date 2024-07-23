@@ -1,5 +1,5 @@
 # FiapBurger EKS Infrastructure
-
+ 
 Este repositório contém a infraestrutura como código (IaC) para provisionar um cluster Kubernetes no Amazon EKS, que suporta a aplicação FiapBurger, um sistema de gerenciamento de pedidos para uma lanchonete.
 
 ## Estrutura do Repositório
