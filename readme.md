@@ -8,7 +8,7 @@ Este repositório contém a infraestrutura como código (IaC) para provisionar u
 ├── .github/workflows/  # CI/CD com GitHub Actions
 ├── main.tf
 ├── kubernetes/
-│ ├── deployments/      # Deployments do Kubernetes para a aplicação
+│ ├── deployments/      # Deployments do Kubernetes para a aplicação 
 │ ├── services/         # Services do Kubernetes para expor a aplicação
 │ ├── ingress/          # Ingress do Kubernetes para acesso HTTP externo
 └── README.md
