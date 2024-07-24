@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_eks_cluster" "fiap_cluster" {
   name     = "fiap-burger-eks-cluster"
-  role_arn = "arn:aws:iam::643230847802:role/LabRole"
+  role_arn = "arn:aws:iam::287009118791:role/LabRole"
 
   vpc_config {
     subnet_ids = [
